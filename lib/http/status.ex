@@ -63,14 +63,9 @@ defmodule Muh.HTTP.Status do
     510 => "Not Extended",
     511 => "Network Authentication Required"
   }
+
   for {code, description} <- statuses do
     def description(unquote(code)), do: unquote(description)
-  end
-
-  full_statuses = for {code, description} <- statuses, into: %{} do
-    {code, "#{code} #{description}"}
-  end
-  for {code, full_status} <- full_statuses do
-    def full_status(unquote(code)), do: unquote(full_status)
+    def full_status(unquote(code)), do: unquote("#{code} #{description}")
   end
 end
