@@ -13,8 +13,8 @@ defmodule Muh.HTTP.Header do
     [encode_value(key), ": ", encode_value(value), "\r\n", encode_headers(rest)]
   end
 
-  defp ensure_binary(bin) when is_binary(bin), do: bin
-  defp ensure_binary(atom) when is_atom(atom) do
+  def ensure_binary(bin) when is_binary(bin), do: bin
+  def ensure_binary(atom) when is_atom(atom) do
     :erlang.atom_to_binary(atom, :latin1)
   end
 
