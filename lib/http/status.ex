@@ -66,7 +66,11 @@ defmodule Muh.HTTP.Status do
   for {code, description} <- statuses do
     def description(unquote(code)), do: unquote(description)
   end
-  for {code, description} <- statuses do
-    def full_description(unquote(code)), do: [to_string(unquote(code)), unquote(description)]
+
+  full_statuses = for {code, description} <- statuses, into: %{} do
+    {code, "#{code} #{description}"}
+  end
+  for {code, full_status} <- full_statuses do
+    def full_status(unquote(code)), do: unquote(full_status)
   end
 end
